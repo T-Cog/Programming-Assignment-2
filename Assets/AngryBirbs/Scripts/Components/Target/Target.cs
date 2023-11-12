@@ -8,8 +8,7 @@ public class Target : MonoBehaviour
     public float MinimumBreakSpeed = 10;
 
     private void OnCollisionEnter2D( Collision2D collision )
-    {
-        
+    {   
         if (collision.relativeVelocity.magnitude >= MinimumBreakSpeed)
         {
             DestroyTarget();

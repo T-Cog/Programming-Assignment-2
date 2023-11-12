@@ -9,15 +9,15 @@ public class MovingTarget : MonoBehaviour
     [Range( 0, 5 )]
     public float MovementSpeed = 2;
 
-    Vector2 startPos;
-    Vector2 top;
-    Vector2 bottom;
+    Vector3 startPos;
+    Vector3 top;
+    Vector3 bottom;
 
-    public void Start()
+    public void Awake()
     {
         startPos = transform.position;
-        top = new Vector2 (transform.position.x, transform.position.y + HalfPathDistance);
-        bottom = new Vector2(transform.position.x, transform.position.y - HalfPathDistance);
+        top = new Vector3 (startPos.x, startPos.y + HalfPathDistance);
+        bottom = new Vector3(startPos.x, startPos.y - HalfPathDistance);
     }
 
     private void FixedUpdate()
@@ -25,15 +25,15 @@ public class MovingTarget : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         Vector2 velocity = new Vector2(0, MovementSpeed);
         
-        if (rb.position == startPos)
+       if (transform.position == startPos)
         {
             rb.velocity = velocity;    
         }
-        if (rb.position == top)
+        else if (transform.position.y >= top.y)
         {
             rb.velocity = -velocity;
         }
-        if (rb.position == bottom)
+        else if (transform.position.y <= bottom.y)
         {
             rb.velocity = velocity;
         }
